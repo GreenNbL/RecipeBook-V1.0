@@ -2,8 +2,11 @@ package com.recipebook.recipebook.models;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -18,21 +21,28 @@ public class Person {
     private int id;
 
     @Column(name = "login")
+    @NotEmpty(message="Login should not be empty")
     private String login;
 
     @Column(name = "password")
+    @NotEmpty(message="Password should not be empty")
     private String password;
 
     @Column(name = "first_name")
+    @NotEmpty(message="First name should not be empty")
     private String firstName;
 
     @Column(name = "second_name")
+    @NotEmpty(message="Second name should not be empty")
     private String secondName;
 
     @Column(name = "email")
+    @NotEmpty(message="Email should not be empty")
+    @Email(message = "Email should be valid")
     private String email;
 
     @Column(name = "date_of_birth")
+    @NotNull(message="Date of birth should not be empty")
     private Date dateOfBirth;
 
     @Column(name = "created_at")
@@ -43,6 +53,8 @@ public class Person {
     private boolean isDeleted;
 
     @Column(name = "sex")
+    @NotEmpty(message="Sex should not be empty")
+    @Size(min = 1, max = 1, message = "Sex consist of one character")
     private String sex;
 
     public Person() {    }
