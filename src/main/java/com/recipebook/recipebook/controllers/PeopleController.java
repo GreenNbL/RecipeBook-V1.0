@@ -7,6 +7,7 @@ import com.recipebook.recipebook.util.PersonErrorResponse;
 import com.recipebook.recipebook.util.PersonNotCreatedException;
 import com.recipebook.recipebook.util.PersonNotFoundException;
 import jakarta.validation.Valid;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,10 +26,12 @@ public class PeopleController {
 
 
     private final PeopleService peopleService;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public PeopleController(PeopleService peopleService) {
+    public PeopleController(PeopleService peopleService, ModelMapper modelMapper) {
         this.peopleService = peopleService;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping()
@@ -39,6 +42,11 @@ public class PeopleController {
     @GetMapping("/{id}")
     public Person getPerson(@PathVariable int id) {
         return peopleService.findOne(id);
+    }
+
+    @GetMapping("/login")
+    public Person login(@RequestParam String login, @RequestParam String password) {
+        return peopleService.searchByLoginAndPassword(login, password);
     }
 
     @PostMapping()
@@ -58,7 +66,7 @@ public class PeopleController {
     @ExceptionHandler
     private ResponseEntity<PersonErrorResponse> handleException(PersonNotFoundException e) {
         PersonErrorResponse response=new PersonErrorResponse(
-                "Person with this id wasn't find",new Date(System.currentTimeMillis())
+                "Person wasn't found",new Date(System.currentTimeMillis())
         );
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }

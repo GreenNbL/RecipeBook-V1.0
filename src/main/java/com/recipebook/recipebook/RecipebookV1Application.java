@@ -1,7 +1,10 @@
 package com.recipebook.recipebook;
 
+import com.recipebook.recipebook.dto.PersonLoginDTO;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class RecipebookV1Application {
@@ -10,4 +13,9 @@ public class RecipebookV1Application {
 		SpringApplication.run(RecipebookV1Application.class, args);
 	}
 
+	@Bean
+	public ModelMapper modelMapper()
+	{
+		return new ModelMapper();
+	}
 }

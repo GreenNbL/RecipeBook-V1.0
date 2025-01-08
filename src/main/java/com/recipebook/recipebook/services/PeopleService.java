@@ -33,6 +33,12 @@ public class PeopleService {
         return foundPerson.orElseThrow(PersonNotFoundException::new);
     }
 
+    public Person searchByLoginAndPassword(String login, String password)
+    {
+        Optional<Person>foundPerson= peopleRepository.findByLoginAndPassword(login,password);
+        return foundPerson.orElseThrow(PersonNotFoundException::new);
+    }
+
     @Transactional
     public void save(Person person)
     {
