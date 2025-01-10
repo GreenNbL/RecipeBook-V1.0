@@ -15,7 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -61,6 +63,25 @@ public class PeopleController {
         }
         peopleService.save(person);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}/avatar")
+    public ResponseEntity<String> updateAvatar(@PathVariable int id,@RequestParam("file") MultipartFile file) {
+        try {
+             peopleService.updateAvatar(id, file);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating avatar");
+        }
+    }
+    @DeleteMapping("/{id}/avatar")
+    public ResponseEntity<String> updateAvatar(@PathVariable int id) {
+        try {
+            peopleService.deleteAvatar(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating avatar");
+        }
     }
 
     @ExceptionHandler

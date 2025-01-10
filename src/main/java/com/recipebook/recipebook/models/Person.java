@@ -57,6 +57,9 @@ public class Person {
     @Size(min = 1, max = 1, message = "Sex consist of one character")
     private String sex;
 
+    @Column(name = "avatar_address")
+    String avatarAddress;
+
     public Person() {    }
 
     public Person(String login, String password, String email, String firstName, String secondName, Date dateOfBirth, Timestamp createdAt, boolean isDeleted, String sex) {
@@ -162,6 +165,14 @@ public class Person {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public String getAvatarAddress() {
+        return avatarAddress;
+    }
+
+    public void setAvatarAddress(String avatarAddress) {
+        this.avatarAddress = avatarAddress;
     }
 
     @Override
