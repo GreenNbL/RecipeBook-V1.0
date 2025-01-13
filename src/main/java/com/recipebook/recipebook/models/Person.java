@@ -10,6 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "person")
@@ -59,6 +60,9 @@ public class Person {
 
     @Column(name = "avatar_address")
     String avatarAddress;
+
+    @OneToMany(mappedBy = "person")
+    private Set<Friendship> friendships;
 
     public Person() {    }
 
@@ -173,6 +177,14 @@ public class Person {
 
     public void setAvatarAddress(String avatarAddress) {
         this.avatarAddress = avatarAddress;
+    }
+
+    public Set<Friendship> getFriendships() {
+        return friendships;
+    }
+
+    public void setFriendships(Set<Friendship> friendships) {
+        this.friendships = friendships;
     }
 
     @Override
