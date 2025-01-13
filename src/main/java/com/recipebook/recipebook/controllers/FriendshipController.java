@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -26,6 +27,11 @@ public class FriendshipController {
     @Autowired
     public FriendshipController(FriendshipsService friendshipsService) {
         this.friendshipsService = friendshipsService;
+    }
+
+    @GetMapping("{id}")
+    public List<Person> getFriends(@PathVariable int id) {
+        return friendshipsService.findFriendsByPersonId(id);
     }
 
     @PostMapping

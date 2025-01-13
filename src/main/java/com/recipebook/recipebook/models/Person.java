@@ -1,6 +1,7 @@
 package com.recipebook.recipebook.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -62,6 +63,7 @@ public class Person {
     String avatarAddress;
 
     @OneToMany(mappedBy = "person")
+    @JsonIgnore
     private Set<Friendship> friendships;
 
     public Person() {    }

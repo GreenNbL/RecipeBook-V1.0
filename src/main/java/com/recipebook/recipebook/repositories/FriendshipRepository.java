@@ -13,8 +13,8 @@ import java.util.Optional;
 @Repository
 public interface FriendshipRepository extends JpaRepository<Friendship, Integer> {
 
-    @Query("SELECT f.friend FROM Friendship f WHERE f.person.id = :personId")
-    List<Person> findFriendsByPersonId(@Param("personId") int personId);
+    @Query("SELECT f FROM Friendship f WHERE f.person.id = :personId OR f.friend.id = :personId"  )
+    List<Friendship> findFriendsByPersonId(@Param("personId") int personId);
 
     Optional<Friendship> findByPersonIdAndFriendId(int personId, int friendshipId);
 }

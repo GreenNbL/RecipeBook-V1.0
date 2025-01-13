@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +25,17 @@ public class FriendshipsService {
     }
 
     public List<Person> findFriendsByPersonId(int id) {
-        return friendshipRepository.findFriendsByPersonId(id);
+        List<Friendship>friendshipList= friendshipRepository.findFriendsByPersonId(id);
+        List<Person> personList=new ArrayList<>();
+        if(friendshipList.isEmpty())
+            return personList;
+        for (Friendship friendship : friendshipList) {
+            if(friendship.getPerson().getId()==id)
+                personList.add(friendship.getFriend());
+            else
+                personList.add(friendship.getPerson());
+        }
+        return personList;
     }
 
     @Transactional
