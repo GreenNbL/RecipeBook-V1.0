@@ -31,6 +31,11 @@ public class Friendship {
     public Friendship() {
     }
 
+    public Friendship(Person person, Person friend) {
+        this.person = person;
+        this.friend = friend;
+    }
+
     public Friendship(int id, Person person, Person friend, Timestamp createdAt, boolean isApproved) {
         this.id = id;
         this.person = person;
