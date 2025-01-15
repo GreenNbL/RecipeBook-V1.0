@@ -1,0 +1,16 @@
+C:\Users\GARAGE\IdeaProjects\RecipeBook-V1.0\src\main\java\com\recipebook\recipebook\controllers\FriendshipController.java
+C:\Users\GARAGE\IdeaProjects\RecipeBook-V1.0\src\main\java\com\recipebook\recipebook\controllers\PeopleController.java
+C:\Users\GARAGE\IdeaProjects\RecipeBook-V1.0\src\main\java\com\recipebook\recipebook\dao\PersonDAO.java
+C:\Users\GARAGE\IdeaProjects\RecipeBook-V1.0\src\main\java\com\recipebook\recipebook\dto\PersonLoginDTO.java
+C:\Users\GARAGE\IdeaProjects\RecipeBook-V1.0\src\main\java\com\recipebook\recipebook\models\Friendship.java
+C:\Users\GARAGE\IdeaProjects\RecipeBook-V1.0\src\main\java\com\recipebook\recipebook\models\Person.java
+C:\Users\GARAGE\IdeaProjects\RecipeBook-V1.0\src\main\java\com\recipebook\recipebook\RecipebookV1Application.java
+C:\Users\GARAGE\IdeaProjects\RecipeBook-V1.0\src\main\java\com\recipebook\recipebook\repositories\FriendshipRepository.java
+C:\Users\GARAGE\IdeaProjects\RecipeBook-V1.0\src\main\java\com\recipebook\recipebook\repositories\PeopleRepository.java
+C:\Users\GARAGE\IdeaProjects\RecipeBook-V1.0\src\main\java\com\recipebook\recipebook\services\FriendshipsService.java
+C:\Users\GARAGE\IdeaProjects\RecipeBook-V1.0\src\main\java\com\recipebook\recipebook\services\PeopleService.java
+C:\Users\GARAGE\IdeaProjects\RecipeBook-V1.0\src\main\java\com\recipebook\recipebook\util\FriendshipErrorResponse.java
+C:\Users\GARAGE\IdeaProjects\RecipeBook-V1.0\src\main\java\com\recipebook\recipebook\util\FriendshipNotFoundException.java
+C:\Users\GARAGE\IdeaProjects\RecipeBook-V1.0\src\main\java\com\recipebook\recipebook\util\PersonErrorResponse.java
+C:\Users\GARAGE\IdeaProjects\RecipeBook-V1.0\src\main\java\com\recipebook\recipebook\util\PersonNotCreatedException.java
+C:\Users\GARAGE\IdeaProjects\RecipeBook-V1.0\src\main\java\com\recipebook\recipebook\util\PersonNotFoundException.java

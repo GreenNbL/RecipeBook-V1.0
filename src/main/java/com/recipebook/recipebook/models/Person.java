@@ -60,7 +60,7 @@ public class Person {
     private String sex;
 
     @Column(name = "avatar_address")
-    String avatarAddress;
+    private String avatarAddress;
 
     @OneToMany(mappedBy = "person")
     @JsonIgnore
@@ -165,20 +165,20 @@ public class Person {
         isDeleted = deleted;
     }
 
-    public String isSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
     public String getAvatarAddress() {
         return avatarAddress;
     }
 
     public void setAvatarAddress(String avatarAddress) {
         this.avatarAddress = avatarAddress;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     public Set<Friendship> getFriendships() {

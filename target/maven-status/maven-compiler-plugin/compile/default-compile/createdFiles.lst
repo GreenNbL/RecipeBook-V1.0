@@ -1,0 +1,16 @@
+com\recipebook\recipebook\services\PeopleService.class
+com\recipebook\recipebook\controllers\PeopleController.class
+com\recipebook\recipebook\util\PersonNotFoundException.class
+com\recipebook\recipebook\repositories\FriendshipRepository.class
+com\recipebook\recipebook\RecipebookV1Application.class
+com\recipebook\recipebook\controllers\FriendshipController.class
+com\recipebook\recipebook\models\Friendship.class
+com\recipebook\recipebook\models\Person.class
+com\recipebook\recipebook\util\PersonNotCreatedException.class
+com\recipebook\recipebook\util\FriendshipErrorResponse.class
+com\recipebook\recipebook\dao\PersonDAO.class
+com\recipebook\recipebook\repositories\PeopleRepository.class
+com\recipebook\recipebook\services\FriendshipsService.class
+com\recipebook\recipebook\util\FriendshipNotFoundException.class
+com\recipebook\recipebook\util\PersonErrorResponse.class
+com\recipebook\recipebook\dto\PersonLoginDTO.class

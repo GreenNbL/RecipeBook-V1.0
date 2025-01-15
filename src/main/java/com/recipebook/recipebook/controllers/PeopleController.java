@@ -9,7 +9,11 @@ import com.recipebook.recipebook.util.PersonNotFoundException;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -17,9 +21,15 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -65,7 +75,7 @@ public class PeopleController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}/avatar")
+    @PostMapping("/{id}/avatar")
     public ResponseEntity<String> updateAvatar(@PathVariable int id,@RequestParam("file") MultipartFile file) {
         try {
              peopleService.updateAvatar(id, file);
@@ -83,6 +93,36 @@ public class PeopleController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating avatar");
         }
     }
+    @GetMapping("/{id}/avatar")
+    public ResponseEntity<Resource> getAvatar(@PathVariable int id) throws FileNotFoundException, MalformedURLException {
+        // Найдите пользователя по ID
+        Person optionalPerson = peopleService.findOne(id);
+        if (optionalPerson == null) {
+            throw new PersonNotFoundException();
+        }
+
+        // Получите адрес аватара
+        String avatarAddress = optionalPerson.getAvatarAddress();
+        Path filePath = (Path) Paths.get(avatarAddress);
+
+        // Проверьте, существует ли файл
+        if (!Files.exists(filePath)) {
+            throw new FileNotFoundException("Avatar not found");
+        }
+
+        // Create a UrlResource from the file path
+        UrlResource resource = new UrlResource(filePath.toUri());
+
+        /// Check if the resource exists
+        if (!resource.exists()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
+    }
+
 
     @ExceptionHandler
     private ResponseEntity<PersonErrorResponse> handleException(PersonNotFoundException e) {
