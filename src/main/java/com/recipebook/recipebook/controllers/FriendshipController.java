@@ -1,5 +1,6 @@
 package com.recipebook.recipebook.controllers;
 
+import com.recipebook.recipebook.dto.PersonLikeFriendDTO;
 import com.recipebook.recipebook.models.Friendship;
 import com.recipebook.recipebook.models.Person;
 import com.recipebook.recipebook.repositories.FriendshipRepository;
@@ -8,6 +9,7 @@ import com.recipebook.recipebook.util.FriendshipErrorResponse;
 import com.recipebook.recipebook.util.FriendshipNotFoundException;
 import com.recipebook.recipebook.util.PersonErrorResponse;
 import com.recipebook.recipebook.util.PersonNotFoundException;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -24,14 +27,20 @@ public class FriendshipController {
 
     private final FriendshipsService friendshipsService;
 
+    private final ModelMapper modelMapper;
+
     @Autowired
-    public FriendshipController(FriendshipsService friendshipsService) {
+    public FriendshipController(FriendshipsService friendshipsService, ModelMapper modelMapper) {
         this.friendshipsService = friendshipsService;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping("{id}")
-    public List<Person> getFriends(@PathVariable int id) {
-        return friendshipsService.findFriendsByPersonId(id);
+    public List<PersonLikeFriendDTO> getFriends(@PathVariable int id) {
+        List<Person> friends =  friendshipsService.findFriendsByPersonId(id);
+        return friends.stream()
+                .map(person -> modelMapper.map(person, PersonLikeFriendDTO.class))
+                .collect(Collectors.toList());
     }
 
     @PostMapping
